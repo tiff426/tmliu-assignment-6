@@ -17,7 +17,7 @@ def generate_plots(N, mu, sigma2, S):
     # Hint: Use numpy's random's functions to generate values for X and Y
     X = np.random.rand(N)  # Replace with code to generate random values for X
     # since we want stdev not var..?
-    Y = np.random.normal(mu, sigma2 ** 0.5, size=N)  # Replace with code to generate random values for Y with specified mean and variance
+    Y = X + np.random.normal(mu, sigma2 ** 0.5, size=N)  # Replace with code to generate random values for Y with specified mean and variance
 
     # TODO 2: Fit a linear regression model to X and Y
     # Hint: Use Scikit Learn
@@ -33,12 +33,8 @@ def generate_plots(N, mu, sigma2, S):
     # Finally, save the plot to "static/plot1.png" using plt.savefig()
     plt.scatter(X, Y, color='blue', label='Data points')  # Scatter plot of X and Y
 
-    # Create a line for the regression model
-    X_line = np.linspace(0, 1, 100).reshape(-1, 1)  # Generate values for the regression line
-    Y_line = model.predict(X_line)  # Predict Y values
-
-    # Plot the regression line
-    plt.plot(X_line, Y_line, color='red', label=f'Regression line: Y = {slope:.2f}*X + {intercept:.2f}')
+    # Plot the regression line w the slope and intercept
+    plt.plot(X, slope*X+intercept, color="red", label='Fitted Regression Line')
     plt.xlabel('X-axis')
     plt.ylabel('Y-axis')
     plt.legend()
@@ -64,7 +60,7 @@ def generate_plots(N, mu, sigma2, S):
         X_sim = np.random.rand(N)  # Replace with code to generate X values
 
         # TODO: Generate Y values with normal additive error (mean mu, variance sigma^2)
-        Y_sim = np.random.normal(mu, sigma2 ** 0.5, size=N)  # Replace with code to generate Y values
+        Y_sim = X_sim + np.random.normal(mu, sigma2 ** 0.5, size=N)  # Replace with code to generate Y values
 
         # TODO: Fit a linear regression model to X_sim and Y_sim
         sim_model = LinearRegression()  # Initialize model
